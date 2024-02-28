@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .transition-bg {
-  transition: background-color 0.5s;
+  transition: box-shadow 0.5s, background-color 0.5s;
 }
 
 .gap-style-dot::after {
