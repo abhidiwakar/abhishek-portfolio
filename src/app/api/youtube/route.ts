@@ -1,6 +1,6 @@
 import { YouTubeId, Youtube, YoutubeSanitizedData } from "@/types/youtube";
 import { kv } from "@vercel/kv";
-import { NextApiRequest } from "next";
+import { NextRequest } from "next/server";
 
 type YoutubeResponse = {
   items: Youtube[];
@@ -92,7 +92,7 @@ const fetchVideosDetails = async (ids: string[]): Promise<YoutubeResponse> => {
   return data;
 };
 
-export const GET = async (req: NextApiRequest) => {
+export const GET = async (req: NextRequest) => {
   const videosListing = await fetchVideosListing();
   const videoIds = videosListing.items.map(
     (video) => (video.id as YouTubeId).videoId
