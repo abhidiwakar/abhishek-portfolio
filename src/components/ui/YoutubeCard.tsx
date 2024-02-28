@@ -5,7 +5,6 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo } from "react";
 dayjs.extend(relativeTime);
 
 type YoutubeCardProps = {
@@ -45,6 +44,7 @@ export default function YoutubeCard({ video }: YoutubeCardProps) {
               <Image
                 src={ExternalLinkIcon}
                 alt="External Link Icon"
+                priority
                 className="w-4"
               />
             </Link>
@@ -52,13 +52,11 @@ export default function YoutubeCard({ video }: YoutubeCardProps) {
         </div>
       </div>
       <div>
-        <img
-          className="w-full sm:max-w-80 rounded-lg shadow-md"
-          src={
-            isMobile
-              ? video.thumbnail.maxres?.url || video.thumbnail.high.url
-              : video.thumbnail.default.url
-          }
+        <Image
+          className="sm:w-32 rounded-lg shadow-md"
+          width={video.thumbnail.high.width}
+          height={video.thumbnail.high.height}
+          src={video.thumbnail.high.url}
           alt={video.title}
         />
       </div>

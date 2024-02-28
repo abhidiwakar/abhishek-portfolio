@@ -22,10 +22,10 @@ export default function Hero() {
     >
       <div className="absolute inset-0 bg-black bg-opacity-50 sm:rounded-xl"></div>
       <h1 className="text-2xl sm:text-4xl font-bold text-white relative z-10">
-        Hi, I'm Abhishek
+        Hi, I&apos;m Abhishek
       </h1>
       <p className="text-slate-300 relative z-10">
-        I'm a Software Engineer specializing in React.js, Next.js, and Node.js,
+        I&apos;m a Software Engineer specializing in React.js, Next.js, and Node.js,
         with experience in AWS services.
       </p>
       <form className="bg-white max-w-sm flex mt-6 rounded-md relative z-10">
