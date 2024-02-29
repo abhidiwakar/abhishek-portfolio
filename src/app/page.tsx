@@ -1,3 +1,5 @@
+import Footer from "@/components/Footer";
+import GithubGraph from "@/components/Github";
 import Hero from "@/components/Hero";
 import Skills from "@/components/Skills";
 import Social from "@/components/Social";
@@ -10,6 +12,8 @@ export default function Homepage() {
       <Skills />
       <YoutubeVideos />
       <Social />
+      <GithubGraph />
+      <Footer />
     </div>
   );
 }
