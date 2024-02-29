@@ -29,8 +29,8 @@ export default function Hero() {
       `mailto:${
         process.env.NEXT_PUBLIC_DEVELOPER_EMAIL
       }?body=${encodeURIComponent(
-        messageInputRef.current.value
-      )}&subject=Message from Portfolio Site`,
+        messageInputRef.current.value.trim()
+      )}&subject=${encodeURIComponent("Message from Portfolio Site")}`,
       "_blank"
     );
     e.currentTarget.reset();
