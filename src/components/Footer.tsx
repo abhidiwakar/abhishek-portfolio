@@ -1,10 +1,14 @@
+import dayjs from "dayjs";
+
 export default function Footer() {
   return (
-    <footer className="bg-slate-100 sm:rounded-md shadow-sm p-2 text-center">
-      <p className="text-sm">
-        😃 Abhishek Diwakar | Software Engineer | React.js, Next.js, Node.js,
-        AWS
+    <footer className="text-center my-6">
+      <p className="font-semibold">
+        Abhishek&apos;s Portfolio, {dayjs().year()}
       </p>
+      <small className="text-slate-500">
+        Software Engineer | React.js, Next.js, Node.js, AWS
+      </small>
     </footer>
   );
 }

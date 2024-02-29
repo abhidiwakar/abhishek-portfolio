@@ -1,25 +1,16 @@
 "use client";
 
-import HeroImage2 from "@/assets/images/billy-williams-8wz1Q4Q_XAg-unsplash.jpg";
-import HeroImage1 from "@/assets/images/neil-mark-thomas-1euFcqLsPWA-unsplash.jpg";
-import HeroImage0 from "@/assets/images/yannik-mika-ymRMOsSgRRA-unsplash.jpg";
+import HeroImage from "@/assets/images/neil-mark-thomas-1euFcqLsPWA-unsplash.jpg";
 import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
 import Image from "next/image";
-import { FormEventHandler, useMemo, useRef } from "react";
+import { FormEventHandler, useRef } from "react";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-const HeroImages = [HeroImage0, HeroImage1, HeroImage2];
-
 export default function Hero() {
   const messageInputRef = useRef<HTMLInputElement>(null);
-  const HeroImage = useMemo(() => {
-    let randomIndex = Math.floor(Math.random() * 3);
-    if (randomIndex > HeroImages.length - 1) randomIndex = 0;
-    return HeroImages[randomIndex];
-  }, []);
 
   const handleMessageSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
