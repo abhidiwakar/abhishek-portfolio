@@ -22,7 +22,7 @@ export default function Hero() {
       }?body=${encodeURIComponent(
         messageInputRef.current.value.trim()
       )}&subject=${encodeURIComponent("Message from Portfolio Site")}`,
-      "_blank"
+      "_self"
     );
     e.currentTarget.reset();
   };
