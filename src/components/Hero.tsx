@@ -1,10 +1,12 @@
 "use client";
 
+import DownloadIcon from "@/assets/icons/download-icon.svg";
 import HeroImage from "@/assets/images/neil-mark-thomas-1euFcqLsPWA-unsplash.jpg";
 import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
 import Image from "next/image";
+import Link from "next/link";
 import { FormEventHandler, useRef } from "react";
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -36,6 +38,22 @@ export default function Hero() {
         className="absolute inset-0 object-cover w-full h-full sm:rounded-xl"
       />
       <div className="absolute inset-0 bg-black bg-opacity-50 sm:rounded-xl"></div>
+      <div className="relative z-10 flex-1 flex justify-end items-start">
+        <Link
+          rel="noopener noreferrer"
+          href="https://drive.google.com/file/d/1Ain0dm4kBTLIyQ6p4XccuwkI0Dd59v1y/view?usp=sharing"
+          className="text-white text-sm flex items-center gap-2 border px-2 py-1 rounded-md"
+          target="_blank"
+        >
+          <Image
+            src={DownloadIcon}
+            alt="Download Icon"
+            priority
+            className="w-4 sm:w-6 invert"
+          />
+          <span>Download Resume</span>
+        </Link>
+      </div>
       <div className="relative z-10">
         <small className="text-slate-300">
           It&apos;s{" "}
