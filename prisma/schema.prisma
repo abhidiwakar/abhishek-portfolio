@@ -20,13 +20,24 @@ enum ProjectStatus {
   PLANNED
 }
 
+enum SocialType {
+  GITHUB
+  LINKEDIN
+  TWITTER
+  EMAIL
+  YOUTUBE
+  DISCORD
+  SLACK
+  SKYPE
+}
+
 model Social {
-  id        String   @id @default(uuid())
-  name      String
+  id        String     @id @default(uuid())
+  name      SocialType
   link      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  Member    Member?  @relation(fields: [memberId], references: [id])
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  Member    Member?    @relation(fields: [memberId], references: [id])
   memberId  String?
 }
 

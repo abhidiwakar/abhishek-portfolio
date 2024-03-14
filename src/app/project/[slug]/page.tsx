@@ -12,6 +12,7 @@ import {
   UserCircle,
   Users,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -107,9 +108,11 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
                 className="border border-slate-200 p-4 rounded-xl transition-bg hover:bg-slate-100 flex flex-col items-center gap-2"
               >
                 {member.avatar ? (
-                  <img
+                  <Image
                     src={member.avatar}
                     alt={member.name}
+                    height={56}
+                    width={56}
                     className="w-14 h-14 object-cover rounded-full"
                   />
                 ) : (

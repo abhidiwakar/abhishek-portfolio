@@ -1,4 +1,7 @@
-import Social from "@/types/social";
+export type Social = {
+  name: string;
+  link: string;
+};
 
 export const socialLinks: Social[] = [
   {

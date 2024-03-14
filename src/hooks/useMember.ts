@@ -1,4 +1,3 @@
-import { fetcher, getUrl } from "@/lib/fetcher";
 import { TeamMember } from "@/types/project";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
