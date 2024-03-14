@@ -10,6 +10,10 @@ const nextConfig = {
         hostname: "via.placeholder.com",
         protocol: "https",
       },
+      {
+        hostname: "localhost",
+        protocol: "http",
+      },
     ],
   },
 };

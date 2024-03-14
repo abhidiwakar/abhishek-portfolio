@@ -4,6 +4,7 @@ import InfoCard from "@/components/InfoCard";
 import ProjectDetailsHero from "@/components/ProjectDetailsHero";
 import { Status, statusText } from "@/components/ui/ProjectStatusPill";
 import prisma from "@/lib/prisma";
+import { getSocialIcon } from "@/lib/social-translator";
 import dayjs from "dayjs";
 import {
   ArrowLeft,
@@ -28,7 +29,11 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
       slug,
     },
     include: {
-      team: true,
+      team: {
+        include: {
+          social: true,
+        },
+      },
     },
   });
 
@@ -113,16 +118,37 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
                     alt={member.name}
                     height={56}
                     width={56}
-                    className="w-14 h-14 object-cover rounded-full"
+                    className="w-10 md:w-14 h-10 md:h-14 object-cover rounded-full"
                   />
                 ) : (
                   <UserCircle className="w-10 md:w-14 h-10 md:h-14" />
                 )}
                 <div className="text-center">
-                  <p className="text-md lg:text-lg font-semibold">
+                  <p className="text-md lg:text-lg font-semibold line-clamp-1">
                     {member.name}
                   </p>
-                  <p className="text-sm text-gray-500">{member.occupation}</p>
+                  <p className="text-sm text-gray-500 line-clamp-1">{member.occupation}</p>
+                </div>
+
+                <div className="flex gap-4 border-t border-slate-200 w-full justify-center items-center pt-3">
+                  {member.social.length > 0 ? (
+                    member.social.map((social, index) => (
+                      <a
+                        key={index}
+                        href={
+                          social.name === "EMAIL"
+                            ? `mailto:${social.link}`
+                            : social.link
+                        }
+                        target="_blank"
+                        rel="noreferrer noindex nofollow"
+                      >
+                        {getSocialIcon(social.name)}
+                      </a>
+                    ))
+                  ) : (
+                    <div className="text-xs text-slate-500 text-center">No socials found for this member.</div>
+                  )}
                 </div>
               </div>
             ))}
