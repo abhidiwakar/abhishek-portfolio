@@ -29,12 +29,26 @@ async function updateUser(
   return Promise.resolve(data as TeamMember);
 }
 
+async function getMembers(url: string) {
+  const result = await fetch(url, {
+    credentials: "include",
+  });
+
+  const data = await result.json();
+
+  if (!result.ok) {
+    return Promise.reject(data);
+  }
+
+  return Promise.resolve(data as TeamMember[]);
+}
+
 const useAddMember = () => {
   return useSWRMutation("/api/team", updateUser);
 };
 
 const useGetMembers = () => {
-  return useSWR<TeamMember[]>([getUrl("/api/team")], fetcher);
+  return useSWR("/api/team", getMembers);
 };
 
 export { useAddMember, useGetMembers };

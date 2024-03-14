@@ -86,7 +86,7 @@ export function AddMemberDialog({ open, onClose, ...props }: Props) {
             />
           </div>
           <DialogFooter>
-            <Button className="bg-blue-500 text-white" type="submit">
+            <Button disabled={isMutating} className="bg-blue-500 text-white" type="submit">
               Add
             </Button>
           </DialogFooter>
