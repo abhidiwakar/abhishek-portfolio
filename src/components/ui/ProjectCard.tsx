@@ -3,6 +3,7 @@ import clsx from "clsx";
 import dayjs from "dayjs";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
+import ProjectStatusPill from "./ProjectStatusPill";
 
 type Props = {
   project: Project;
@@ -30,20 +31,7 @@ export default function ProjectCard({ project }: Props) {
           ? ` - ${dayjs(project.endDate).format("MMM, YYYY")}`
           : ""}
       </p>
-      <p>
-        <span
-          className={twMerge(
-            "text-xs text-slate-400 px-2 py-1 rounded-full inline-block mt-2",
-            clsx({
-              "bg-green-500 text-white": project.status === "COMPLETED",
-              "bg-yellow-500 text-black": project.status === "IN_PROGRESS",
-              "bg-slate-200 text-black": project.status === "PLANNED",
-            })
-          )}
-        >
-          {statusText[project.status] ?? "Unknown"}
-        </span>
-      </p>
+      <ProjectStatusPill status={project.status} className="mt-2" />
     </div>
   );
 }

@@ -1,10 +1,10 @@
 "use client";
 
-import DownloadIcon from "@/assets/icons/download-icon.svg";
 import HeroImage from "@/assets/images/neil-mark-thomas-1euFcqLsPWA-unsplash.jpg";
 import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
+import { Download } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { FormEventHandler, useRef } from "react";
@@ -45,12 +45,7 @@ export default function Hero() {
           className="text-white text-sm flex items-center gap-2 border px-2 py-1 rounded-md"
           target="_blank"
         >
-          <Image
-            src={DownloadIcon}
-            alt="Download Icon"
-            priority
-            className="w-4 sm:w-6 invert"
-          />
+          <Download size={20} />
           <span>Download Resume</span>
         </Link>
       </div>

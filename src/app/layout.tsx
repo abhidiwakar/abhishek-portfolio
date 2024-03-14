@@ -12,6 +12,25 @@ export const metadata: Metadata = {
   description: `Abhishek Diwakar is a Full Stack Software Engineer | ${dayjs()
     .diff(careerStartDate, "years")
     .toFixed(0)}+ Years of Experience | MERN, Flutter, React Native`,
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL!),
+  openGraph: {
+    type: "profile",
+    emails: [process.env.NEXT_PUBLIC_DEVELOPER_EMAIL!],
+    countryName: "India",
+    firstName: "Abhishek",
+    lastName: "Diwakar",
+    gender: "Male",
+    url: process.env.NEXT_PUBLIC_BASE_URL,
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 176,
+        height: 176,
+        alt: "Abhishek Diwakar",
+        type: "image/jpeg",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({

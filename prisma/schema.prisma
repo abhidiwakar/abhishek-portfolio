@@ -43,7 +43,7 @@ model Member {
 
 model Project {
   id               String        @id @default(uuid())
-  slug             String
+  slug             String        @unique
   thumbnail        String?
   name             String
   description      String
