@@ -14,6 +14,10 @@ const nextConfig = {
         hostname: "localhost",
         protocol: "http",
       },
+      {
+        hostname: "utfs.io",
+        protocol: "https",
+      },
     ],
   },
 };
