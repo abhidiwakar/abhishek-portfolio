@@ -10,7 +10,7 @@ export default function Social() {
         {socialLinks.map((social, index) => (
           <div key={index} className="underline">
             <Link
-              href={social.url}
+              href={social.link}
               target="_blank"
               rel="noopener noreferrer nofollow"
             >
