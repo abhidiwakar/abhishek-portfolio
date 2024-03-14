@@ -6,7 +6,13 @@ export const GET = async (request: NextRequest) => {
   const search = request.nextUrl.searchParams.get("search")?.trim() || "";
   const team = await prisma.member.findMany({
     include: {
-      social: true,
+      social: {
+        select: {
+          id: true,
+          name: true,
+          link: true,
+        },
+      },
     },
     where:
       search.length > 0
@@ -35,7 +41,13 @@ export const POST = async (request: NextRequest) => {
 
   const member = await prisma.member.create({
     include: {
-      social: true,
+      social: {
+        select: {
+          id: true,
+          name: true,
+          link: true,
+        },
+      },
     },
     data: {
       ...validatedData.data,
@@ -73,7 +85,10 @@ export const PUT = async (request: NextRequest) => {
   }
 
   if (!validatedData.data.id) {
-    return Response.json({ message: "Invalid data! Id missing." }, { status: 400 });
+    return Response.json(
+      { message: "Invalid data! Id missing." },
+      { status: 400 }
+    );
   }
 
   const id = validatedData.data.id;
@@ -81,7 +96,13 @@ export const PUT = async (request: NextRequest) => {
   // Update the member
   const member = await prisma.member.update({
     include: {
-      social: true,
+      social: {
+        select: {
+          id: true,
+          name: true,
+          link: true,
+        },
+      },
     },
     where: {
       id,
