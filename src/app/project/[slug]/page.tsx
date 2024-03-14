@@ -1,10 +1,17 @@
+import Footer from "@/components/Footer";
 import InfoCard from "@/components/InfoCard";
 
 import ProjectDetailsHero from "@/components/ProjectDetailsHero";
 import { Status, statusText } from "@/components/ui/ProjectStatusPill";
 import prisma from "@/lib/prisma";
 import dayjs from "dayjs";
-import { ArrowLeft, CalendarIcon, HourglassIcon, Users } from "lucide-react";
+import {
+  ArrowLeft,
+  CalendarIcon,
+  HourglassIcon,
+  UserCircle,
+  Users,
+} from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -69,13 +76,57 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             </span>
           </InfoCard>
         </div>
+        <div className="border rounded-xl p-4">
+          <h2 className="text-xl font-semibold">Technologies</h2>
+          <small className="text-sm text-gray-400">
+            Below are the technologies used in this project.
+          </small>
+          <div className="flex flex-wrap gap-2 mt-2">
+            {projectDetails.technologies.map((tech, index) => (
+              <span key={index} className="px-2 py-1 bg-slate-100 rounded-md">
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
         <div
-          className="mt-4"
+          className="my-4 border rounded-xl p-4"
           dangerouslySetInnerHTML={{
             __html: projectDetails.description,
           }}
         />
+        <div className="my-4 border rounded-xl p-4">
+          <div className="mb-4">
+            <h2 className="text-2xl font-semibold">Team</h2>
+            <small className="text-sm text-gray-400">{`${projectDetails.team.length} member(s)`}</small>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+            {projectDetails.team.map((member) => (
+              <div
+                key={member.id}
+                className="border border-slate-200 p-4 rounded-xl transition-bg hover:bg-slate-100 flex flex-col items-center gap-2"
+              >
+                {member.avatar ? (
+                  <img
+                    src={member.avatar}
+                    alt={member.name}
+                    className="w-14 h-14 object-cover rounded-full"
+                  />
+                ) : (
+                  <UserCircle className="w-10 md:w-14 h-10 md:h-14" />
+                )}
+                <div className="text-center">
+                  <p className="text-md lg:text-lg font-semibold">
+                    {member.name}
+                  </p>
+                  <p className="text-sm text-gray-500">{member.occupation}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
+      <Footer />
     </div>
   );
 }
