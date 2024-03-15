@@ -4,12 +4,15 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { careerStartDate } from "@/data/skill";
 import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Who is Abhishek Diwakar? | Full Stack Software Engineer",
+  title: {
+    template: "%s | Full Stack Software Engineer",
+    default: "Who is Abhishek Diwakar?",
+  },
   description: `Abhishek Diwakar is a Full Stack Software Engineer | ${dayjs()
     .diff(careerStartDate, "years")
     .toFixed(0)}+ Years of Experience | MERN, Flutter, React Native`,

@@ -3,7 +3,7 @@ import InfoCard from "@/components/InfoCard";
 
 import ProjectDetailsHero from "@/components/ProjectDetailsHero";
 import { Status, statusText } from "@/components/ui/ProjectStatusPill";
-import { getAPIUrl } from "@/lib/fetcher";
+import { getAPIUrl, getUrl } from "@/lib/fetcher";
 import { getSocialIcon } from "@/lib/social-translator";
 import { Project } from "@/types/project";
 import dayjs from "dayjs";
@@ -14,9 +14,20 @@ import {
   UserCircle,
   Users,
 } from "lucide-react";
+import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+
+const getProjectDetails = async (slug: string) => {
+  const projectDetails = (
+    (await (
+      await fetch(getAPIUrl("/project?slug=" + slug))
+    ).json()) as Project[]
+  )?.[0];
+
+  return projectDetails;
+};
 
 type Props = {
   params: {
@@ -24,12 +35,46 @@ type Props = {
   };
 };
 
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const slug = params.slug;
+
+  // fetch data
+  const project = await getProjectDetails(slug);
+
+  if (!project) {
+    return {
+      title: "Project not found",
+    };
+  }
+
+  const keywords = [
+    ...project.technologies,
+    ...project.team.map((e) => e.name),
+  ];
+
+  return {
+    title: project.name,
+    description: project.smallDescription,
+    keywords,
+    openGraph: {
+      type: "article",
+      url: getUrl(`/project/${slug}`),
+      authors: ["Abhishek Diwakar"],
+      countryName: "India",
+      images: project.thumbnail,
+      emails: [process.env.NEXT_PUBLIC_DEVELOPER_EMAIL!],
+      modifiedTime: new Date(project.updatedAt).toISOString(),
+      publishedTime: new Date(project.createdAt).toISOString(),
+      tags: keywords,
+    },
+  };
+}
+
 export default async function ProjectDetails({ params: { slug } }: Props) {
-  const projectDetails = (
-    (await (
-      await fetch(getAPIUrl("/project?slug=" + slug))
-    ).json()) as Project[]
-  )?.[0];
+  const projectDetails = await getProjectDetails(slug);
 
   if (!projectDetails) {
     notFound();
