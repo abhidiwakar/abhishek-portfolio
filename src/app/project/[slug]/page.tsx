@@ -3,8 +3,9 @@ import InfoCard from "@/components/InfoCard";
 
 import ProjectDetailsHero from "@/components/ProjectDetailsHero";
 import { Status, statusText } from "@/components/ui/ProjectStatusPill";
-import prisma from "@/lib/prisma";
+import { getAPIUrl } from "@/lib/fetcher";
 import { getSocialIcon } from "@/lib/social-translator";
+import { Project } from "@/types/project";
 import dayjs from "dayjs";
 import {
   ArrowLeft,
@@ -24,18 +25,11 @@ type Props = {
 };
 
 export default async function ProjectDetails({ params: { slug } }: Props) {
-  const projectDetails = await prisma.project.findUnique({
-    where: {
-      slug,
-    },
-    include: {
-      team: {
-        include: {
-          social: true,
-        },
-      },
-    },
-  });
+  const projectDetails = (
+    (await (
+      await fetch(getAPIUrl("/project?slug=" + slug))
+    ).json()) as Project[]
+  )?.[0];
 
   if (!projectDetails) {
     notFound();
@@ -133,8 +127,8 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
                 </div>
 
                 <div className="flex gap-4 border-t border-slate-200 w-full justify-center items-center pt-3">
-                  {member.social.length > 0 ? (
-                    member.social.map((social, index) => (
+                  {member.social && member.social?.length > 0 ? (
+                    member.social?.map((social, index) => (
                       <a
                         key={index}
                         href={

@@ -1,5 +1,7 @@
+import { PROJECT_CACHE_KEY } from "@/lib/constants";
 import prisma from "@/lib/prisma";
 import { MEMBER_VALIDATION } from "@/validators/team-validator";
+import { kv } from "@vercel/kv";
 import { NextRequest } from "next/server";
 
 export const GET = async (request: NextRequest) => {
@@ -129,6 +131,9 @@ export const PUT = async (request: NextRequest) => {
             },
     },
   });
+
+  // Invalidate the project cache because we updated the member
+  await kv.del(PROJECT_CACHE_KEY);
 
   return Response.json(member);
 };

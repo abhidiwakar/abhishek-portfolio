@@ -1,17 +1,49 @@
+import { PROJECT_CACHE_KEY } from "@/lib/constants";
 import prisma from "@/lib/prisma";
 import { slugify } from "@/lib/utils";
 import { ADD_PROJECT_VALIDATION } from "@/validators/project-validator";
+import { kv } from "@vercel/kv";
+import { NextRequest } from "next/server";
 import { generate as generateShortUUID } from "short-uuid";
 
-export const GET = async () => {
+export const GET = async (req: NextRequest) => {
+  const slug = req.nextUrl.searchParams.get("slug");
+
+  if (process.env.NODE_ENV !== "development") {
+    const cachedResponse = await kv.get(slug || PROJECT_CACHE_KEY);
+    // If we have a cached response, return it instead of fetching from the database.
+    if (cachedResponse) {
+      return Response.json(cachedResponse);
+    }
+  }
+
   const projects = await prisma.project.findMany({
     include: {
-      team: true,
+      team: {
+        include: {
+          social: {
+            select: {
+              id: true,
+              name: true,
+              link: true,
+            },
+          },
+        },
+      },
     },
+    where: slug ? { slug } : undefined,
     orderBy: {
       startDate: "desc",
     },
   });
+
+  if (process.env.NODE_ENV !== "development" && projects.length > 0) {
+    // Cache the response for 7 days.
+    await kv.set(slug || PROJECT_CACHE_KEY, JSON.stringify(projects), {
+      ex: 60 * 60 * 24 * 7,
+    });
+  }
+
   return Response.json(projects);
 };
 
@@ -37,7 +69,17 @@ export const POST = async (req: Request) => {
 
   const project = await prisma.project.create({
     include: {
-      team: true,
+      team: {
+        include: {
+          social: {
+            select: {
+              id: true,
+              name: true,
+              link: true,
+            },
+          },
+        },
+      },
     },
     data: {
       slug: `${generateShortUUID().toLowerCase()}-${slugify(data.name)}`,
@@ -47,6 +89,9 @@ export const POST = async (req: Request) => {
       },
     },
   });
+
+  // Invalidate the cache
+  await kv.del(PROJECT_CACHE_KEY);
 
   return Response.json(project, { status: 201 });
 };
