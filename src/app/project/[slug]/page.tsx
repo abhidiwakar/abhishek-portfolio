@@ -95,12 +95,14 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             ))}
           </div>
         </div>
-        <div
-          className="my-4 border rounded-xl p-4"
-          dangerouslySetInnerHTML={{
-            __html: projectDetails.description,
-          }}
-        />
+        <div className="my-4 border rounded-xl p-4">
+          <div
+            className="editor-content prose"
+            dangerouslySetInnerHTML={{
+              __html: projectDetails.description,
+            }}
+          />
+        </div>
         <div className="my-4 border rounded-xl p-4">
           <div className="mb-4">
             <h2 className="text-2xl font-semibold">Team</h2>
@@ -127,7 +129,9 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
                   <p className="text-md lg:text-lg font-semibold line-clamp-1">
                     {member.name}
                   </p>
-                  <p className="text-sm text-gray-500 line-clamp-1">{member.occupation}</p>
+                  <p className="text-sm text-gray-500 line-clamp-1">
+                    {member.occupation}
+                  </p>
                 </div>
 
                 <div className="flex gap-4 border-t border-slate-200 w-full justify-center items-center pt-3">
@@ -147,7 +151,9 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
                       </a>
                     ))
                   ) : (
-                    <div className="text-xs text-slate-500 text-center">No socials found for this member.</div>
+                    <div className="text-xs text-slate-500 text-center">
+                      No socials found for this member.
+                    </div>
                   )}
                 </div>
               </div>
