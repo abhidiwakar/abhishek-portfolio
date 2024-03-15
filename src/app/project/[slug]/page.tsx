@@ -95,14 +95,12 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             ))}
           </div>
         </div>
-        <div className="my-4 border rounded-xl p-4">
-          <div
-            className="editor-content prose"
-            dangerouslySetInnerHTML={{
-              __html: projectDetails.description,
-            }}
-          />
-        </div>
+        <div
+          className="my-4 border rounded-xl p-4 editor-content prose max-w-none"
+          dangerouslySetInnerHTML={{
+            __html: projectDetails.description,
+          }}
+        />
         <div className="my-4 border rounded-xl p-4">
           <div className="mb-4">
             <h2 className="text-2xl font-semibold">Team</h2>
