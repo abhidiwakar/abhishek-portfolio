@@ -64,7 +64,15 @@ export async function generateMetadata(
       url: getUrl(`/project/${slug}`),
       authors: ["Abhishek Diwakar"],
       countryName: "India",
-      images: project.thumbnail,
+      images: project.thumbnail || [
+        {
+          url: "/og-image.jpg",
+          width: 176,
+          height: 176,
+          alt: "Abhishek Diwakar",
+          type: "image/jpeg",
+        },
+      ],
       emails: [process.env.NEXT_PUBLIC_DEVELOPER_EMAIL!],
       modifiedTime: new Date(project.updatedAt).toISOString(),
       publishedTime: new Date(project.createdAt).toISOString(),
