@@ -1,23 +1,15 @@
 import { Project } from "@/types/project";
-import clsx from "clsx";
 import dayjs from "dayjs";
 import Link from "next/link";
-import { twMerge } from "tailwind-merge";
 import ProjectStatusPill from "./ProjectStatusPill";
 
 type Props = {
   project: Project;
 };
 
-const statusText = {
-  COMPLETED: "Completed",
-  IN_PROGRESS: "In Progress",
-  PLANNED: "Planned",
-};
-
 export default function ProjectCard({ project }: Props) {
   return (
-    <div className="bg-white border rounded-lg p-6">
+    <div className="bg-white border rounded-lg p-6 shadow-sm hover:bg-slate-100 transition-bg">
       <Link
         href={`/project/${project.slug}`}
         className="text-lg font-semibold hover:underline"

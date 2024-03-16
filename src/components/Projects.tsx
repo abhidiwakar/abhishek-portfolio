@@ -44,7 +44,7 @@ export default function Projects() {
                 ))}
               </div>
               <small className="text-slate-400 mt-1">
-                Click on a project to view more details.
+                Click on a project name to view more details.
               </small>
             </>
           ) : (
