@@ -1,15 +1,9 @@
-import prisma from "@/lib/prisma";
+import { getAPIUrl } from "@/lib/fetcher";
+import { Project } from "@/types/project";
 import { IImageEntry, ISitemapField, getServerSideSitemap } from "next-sitemap";
 
 export async function GET(request: Request) {
-  const projects = await prisma.project.findMany({
-    select: {
-      name: true,
-      thumbnail: true,
-      slug: true,
-      updatedAt: true,
-    },
-  });
+  const projects: Project[] = await (await fetch(getAPIUrl("/project"))).json();
 
   return getServerSideSitemap([
     ...projects.map(
