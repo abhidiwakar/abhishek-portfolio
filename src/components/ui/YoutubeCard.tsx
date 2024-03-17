@@ -15,7 +15,7 @@ export default function YoutubeCard({ video }: YoutubeCardProps) {
   const isMobile = useMediaQuery("(max-width: 640px)");
 
   return (
-    <div className="flex flex-col-reverse sm:flex-row border rounded-lg p-4 gap-4 shadow-sm">
+    <div className="flex flex-col-reverse sm:flex-row border dark:border-slate-700 rounded-lg p-4 gap-4 shadow-sm">
       <div className="flex-1 flex flex-col">
         <small className="text-gray-400">
           Uploaded {dayjs(video.publishedAt).fromNow()}
@@ -33,7 +33,7 @@ export default function YoutubeCard({ video }: YoutubeCardProps) {
           )}
         </div>
         <div>
-          <button className="border border-gray-300 rounded-lg text-sm mt-2 hover:bg-gray-100 transition-bg shadow-sm">
+          <button className="border border-gray-300 dark:border-slate-700 rounded-lg text-sm mt-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition-bg shadow-sm">
             <Link
               href={video.videoLink}
               target="_blank"
@@ -45,7 +45,7 @@ export default function YoutubeCard({ video }: YoutubeCardProps) {
                 src={ExternalLinkIcon}
                 alt="External Link Icon"
                 priority
-                className="w-4"
+                className="w-4 dark:invert"
               />
             </Link>
           </button>

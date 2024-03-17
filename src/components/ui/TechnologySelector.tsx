@@ -31,12 +31,13 @@ const TechnologySelector = React.forwardRef<
 
   return (
     <div>
-      <label className="block text-sm font-medium leading-6 text-gray-900">
+      <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">
         Technologies <span className="text-red-500">*</span>
       </label>
       <ReactSelect
         ref={ref}
-        className="mt-1"
+        className="mt-1 react-select-container"
+        classNamePrefix="react-select"
         isMulti
         cacheOptions
         defaultOptions

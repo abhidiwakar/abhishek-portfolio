@@ -27,7 +27,7 @@ export default function Projects() {
           <div>
             <Button
               variant="outline"
-              className="border-red-300"
+              className="border-red-300 dark:border-red-700"
               onClick={() => mutate()}
             >
               Retry

@@ -93,7 +93,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
       <div className="sm:flex mb-2 hidden">
         <Link
           href="/"
-          className="my-3 flex items-center gap-2 hover:bg-slate-100 px-3 py-1 rounded"
+          className="my-3 flex items-center gap-2 hover:bg-slate-100 dark:hover:bg-slate-800 px-3 py-1 rounded"
         >
           <ArrowLeft />
           <span>Go to Home</span>
@@ -129,26 +129,26 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             </span>
           </InfoCard>
         </div>
-        <div className="border rounded-xl p-4">
+        <div className="border dark:border-slate-700 rounded-xl p-4">
           <h2 className="text-xl font-semibold">Technologies</h2>
           <small className="text-sm text-gray-400">
             Below are the technologies used in this project.
           </small>
           <div className="flex flex-wrap gap-2 mt-2">
             {projectDetails.technologies.map((tech, index) => (
-              <span key={index} className="px-2 py-1 bg-slate-100 rounded-md">
+              <span key={index} className="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded-md">
                 {tech}
               </span>
             ))}
           </div>
         </div>
         <div
-          className="my-4 border rounded-xl p-4 editor-content prose max-w-none"
+          className="my-4 border dark:border-slate-700 rounded-xl p-4 editor-content prose dark:prose-invert max-w-none"
           dangerouslySetInnerHTML={{
             __html: projectDetails.description,
           }}
         />
-        <div className="my-4 border rounded-xl p-4">
+        <div className="my-4 border dark:border-slate-700 rounded-xl p-4">
           <div className="mb-4">
             <h2 className="text-2xl font-semibold">Team</h2>
             <small className="text-sm text-gray-400">{`${projectDetails.team.length} member(s)`}</small>
@@ -157,7 +157,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             {projectDetails.team.map((member) => (
               <div
                 key={member.id}
-                className="border border-slate-200 p-4 rounded-xl transition-bg hover:bg-slate-100 flex flex-col items-center gap-2"
+                className="border border-slate-200 dark:border-slate-800 p-4 rounded-xl transition-bg hover:bg-slate-100 dark:hover:bg-slate-800 flex flex-col items-center gap-2"
               >
                 {member.avatar ? (
                   <Image
@@ -179,7 +179,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
                   </p>
                 </div>
 
-                <div className="flex gap-4 border-t border-slate-200 w-full justify-center items-center pt-3">
+                <div className="flex gap-4 border-t border-slate-200 dark:border-slate-700 w-full justify-center items-center pt-3">
                   {member.social && member.social?.length > 0 ? (
                     member.social?.map((social, index) => (
                       <a

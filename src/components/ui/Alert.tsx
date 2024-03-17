@@ -20,12 +20,14 @@ export default function Alert({
   return (
     <div
       className={twMerge(
-        "border p-3 rounded-md",
+        "border dark:border-slate-700 p-3 rounded-md",
         clsx({
-          "border-red-500 bg-red-100": variant === "error",
-          "border-orange-500 bg-orange-100": variant === "warning",
-          "border-blue-500 bg-blue-100": variant === "info",
-          "border-green-500 bg-green-100": variant === "success",
+          "border-red-500 bg-red-100 dark:bg-red-900": variant === "error",
+          "border-orange-500 bg-orange-100 dark:bg-orange-900":
+            variant === "warning",
+          "border-blue-500 bg-blue-100 dark:bg-blue-900": variant === "info",
+          "border-green-500 bg-green-100 dark:bg-green-900":
+            variant === "success",
         }),
         props.className
       )}

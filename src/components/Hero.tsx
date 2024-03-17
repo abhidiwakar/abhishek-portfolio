@@ -65,13 +65,13 @@ export default function Hero() {
           Node.js, with experience in AWS services.
         </p>
         <form
-          className="bg-white max-w-sm flex mt-6 rounded-md"
+          className="bg-white dark:bg-gray-800 max-w-sm flex mt-6 rounded-md"
           onSubmit={handleMessageSubmit}
         >
           <input
             ref={messageInputRef}
             type="text"
-            className="p-3 m-3 w-full focus:outline-none"
+            className="p-3 m-3 w-full focus:outline-none dark:bg-gray-800 dark:text-white"
             placeholder="Send me a message..."
           />
           <button

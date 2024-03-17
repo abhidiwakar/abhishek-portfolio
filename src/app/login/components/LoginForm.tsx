@@ -14,6 +14,7 @@ export default function LoginForm() {
         id="access_key"
         name="access_key"
         placeholder="Enter your access key here..."
+        className="dark:bg-slate-800 dark:text-white"
       />
       <button
         disabled={pending}

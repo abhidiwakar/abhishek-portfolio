@@ -3,6 +3,8 @@
 import useYoutube from "@/hooks/useYoutube";
 import YoutubeCard from "./ui/YoutubeCard";
 import Link from "next/link";
+import Alert from "./ui/Alert";
+import { Button } from "./ui/shad/Button";
 
 export default function YoutubeVideos() {
   const { isError, isLoading, data, mutate } = useYoutube();
@@ -26,24 +28,26 @@ export default function YoutubeVideos() {
         </Link>
       </div>
       {isError && (
-        <div className="bg-red-200 rounded-md p-4 mt-3 flex flex-col sm:flex-row gap-3 sm:items-center">
-          <div className="flex-1">
-            <p className="text-lg font-semibold">Error</p>
-            <p>Failed to load videos. Please try again later.</p>
+        <Alert
+          className="mt-2 flex flex-col md:flex-row md:justify-between md:items-center gap-2"
+          variant="error"
+        >
+          <p>Failed to load videos. Please try again later.</p>
+          <div>
+            <Button
+              variant="outline"
+              className="border-red-300 dark:border-red-700"
+              onClick={() => mutate()}
+            >
+              Retry
+            </Button>
           </div>
-          <button
-            className="border rounded-md px-4 py-2 w-fit bg-white shadow-sm text-sm font-semibold"
-            onClick={() => mutate()}
-          >
-            Retry
-          </button>
-        </div>
+        </Alert>
       )}
       {isLoading && (
-        <div className="bg-slate-50 rounded-md p-4 mt-3">
-          <p className="text-lg font-semibold">Loading</p>
-          <p className="text-slate-400 text-sm">Fetching videos...</p>
-        </div>
+        <Alert title="Please wait">
+          <p>Loading videos...</p>
+        </Alert>
       )}
       <div className="grid gap-4 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 mt-2">
         {data?.map((video) => (

@@ -16,7 +16,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(function (
     <div>
       <label
         htmlFor={props.name}
-        className="block text-sm font-medium leading-6 text-gray-900"
+        className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-100"
       >
         {label} {props.required && <span className="text-red-600">*</span>}
       </label>
@@ -25,7 +25,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(function (
           ref={ref}
           {...props}
           className={twMerge(
-            "block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6",
+            "block w-full rounded-md border-0 p-2 text-gray-900 dark:bg-slate-800 dark:text-gray-100 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6",
             className,
             clsx({
               "bg-gray-100": props.disabled,

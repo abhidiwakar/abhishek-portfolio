@@ -9,7 +9,7 @@ type Props = {
 
 export default function ProjectCard({ project }: Props) {
   return (
-    <div className="bg-white border rounded-lg p-6 shadow-sm hover:bg-slate-100 transition-bg">
+    <div className="border dark:border-slate-700 rounded-lg p-6 shadow-sm hover:bg-slate-100 dark:hover:bg-slate-800 transition-bg">
       <Link
         href={`/project/${project.slug}`}
         className="text-lg font-semibold hover:underline"

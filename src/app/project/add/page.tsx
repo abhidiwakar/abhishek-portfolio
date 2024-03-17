@@ -6,6 +6,7 @@ import { Select } from "@/components/ui/Select";
 import { TeamSelector } from "@/components/ui/TeamSelector";
 import { TechnologySelector } from "@/components/ui/TechnologySelector";
 import { Button } from "@/components/ui/shad/Button";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useAddProject } from "@/hooks/useProject";
 import { ADD_PROJECT_VALIDATION } from "@/validators/project-validator";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,6 +18,7 @@ import { z } from "zod";
 type Values = z.infer<typeof ADD_PROJECT_VALIDATION>;
 
 export default function AddProject() {
+  const isDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const { mutate, isLoading, reset: resetApi } = useAddProject();
   const ref = React.useRef<Editor>(null);
   const {
@@ -102,6 +104,8 @@ export default function AddProject() {
             ref={ref}
             apiKey={process.env.NEXT_PUBLIC_TINY_MCE_API_KEY}
             init={{
+              skin: isDarkMode ? "oxide-dark" : "oxide",
+              content_css: isDarkMode ? "dark" : "default",
               plugins:
                 "anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks linkchecker",
               toolbar:

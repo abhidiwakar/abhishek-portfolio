@@ -26,17 +26,17 @@ export default function SkillCard({ skill: { imgProps, ...skill } }: Props) {
   return (
     <div
       className={twMerge(
-        "border p-3 rounded-md shadow-sm hover:bg-slate-100 transition-bg"
+        "border dark:border-slate-700 p-3 rounded-md shadow-sm hover:bg-slate-100 dark:hover:bg-slate-800 transition-bg"
       )}
     >
       <Image
         priority
         src={skill.icon}
         alt={skill.name}
-        className={twMerge("w-8", imgProps?.className)}
+        className={twMerge("w-8 dark:invert", imgProps?.className)}
       />
       <p className="font-semibold mt-1">{skill.name}</p>
-      <small className="text-slate-500">
+      <small className="text-slate-500 dark:text-slate-400">
         {experience < 1 ? "less than a year" : `${experience}+ years`}
       </small>
     </div>
