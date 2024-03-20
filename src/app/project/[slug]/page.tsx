@@ -11,10 +11,12 @@ import {
   ArrowLeft,
   CalendarIcon,
   HourglassIcon,
+  PencilIcon,
   UserCircle,
   Users,
 } from "lucide-react";
 import { Metadata, ResolvingMetadata } from "next";
+import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -82,6 +84,7 @@ export async function generateMetadata(
 }
 
 export default async function ProjectDetails({ params: { slug } }: Props) {
+  const isAuthenticated = cookies().get("api_key")?.value !== undefined;
   const projectDetails = await getProjectDetails(slug);
 
   if (!projectDetails) {
@@ -90,14 +93,23 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
 
   return (
     <div className="container sm:my-6">
-      <div className="sm:flex mb-2 hidden">
+      <div className="sm:flex mb-2 hidden gap-3 justify-between">
         <Link
           href="/"
           className="my-3 flex items-center gap-2 hover:bg-slate-100 dark:hover:bg-slate-800 px-3 py-1 rounded"
         >
-          <ArrowLeft />
+          <ArrowLeft size={18} />
           <span>Go to Home</span>
         </Link>
+        {isAuthenticated && (
+          <Link
+            href={`/project/${slug}/edit`}
+            className="my-3 flex items-center gap-2 hover:bg-slate-100 dark:hover:bg-slate-800 px-3 py-1 rounded"
+          >
+            <PencilIcon size={18} />
+            <span>Edit</span>
+          </Link>
+        )}
       </div>
       <ProjectDetailsHero
         title={projectDetails.name}
@@ -136,7 +148,10 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           </small>
           <div className="flex flex-wrap gap-2 mt-2">
             {projectDetails.technologies.map((tech, index) => (
-              <span key={index} className="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded-md">
+              <span
+                key={index}
+                className="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded-md"
+              >
                 {tech}
               </span>
             ))}
