@@ -7,6 +7,7 @@ import { TeamSelector } from "@/components/ui/TeamSelector";
 import { TechnologySelector } from "@/components/ui/TechnologySelector";
 import { Button } from "@/components/ui/shad/Button";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { uploadFile } from "@/lib/uploadthing";
 import { Project } from "@/types/project";
 import { ADD_PROJECT_VALIDATION } from "@/validators/project-validator";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -53,14 +54,6 @@ export default function ProjectForm({ initialData, ...props }: Props) {
       delete data.endDate;
     }
 
-    // console.log(data);
-
-    // mutate({ ...data }).then((project) => {
-    //   ref.current?.editor?.setContent("");
-    //   reset();
-    //   resetApi?.();
-    //   props.onSuccess?.(project);
-    // });
     props.onSubmit(data);
     reset();
   };
@@ -126,6 +119,8 @@ export default function ProjectForm({ initialData, ...props }: Props) {
           ref={ref}
           apiKey={process.env.NEXT_PUBLIC_TINY_MCE_API_KEY}
           init={{
+            images_upload_handler: (blob) =>
+              uploadFile(new File([blob.blob()], blob.filename())),
             skin: isDarkMode ? "oxide-dark" : "oxide",
             content_css: isDarkMode ? "dark" : "default",
             plugins:
