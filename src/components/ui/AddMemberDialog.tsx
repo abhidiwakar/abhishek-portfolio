@@ -70,7 +70,7 @@ export function AddMemberDialog({ open, onClose, ...props }: Props) {
         }
       }}
     >
-      <DialogContent className="bg-white sm:max-w-[425px]">
+      <DialogContent className="bg-white dark:bg-gray-900 dark:border-none sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Add Member</DialogTitle>
         </DialogHeader>
